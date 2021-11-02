@@ -7,6 +7,12 @@ const PORT = 8080;
 
 
 
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html')
+})
+
+
 app.listen(PORT, function() {
     log("Server is running on port 8080...")
 })
