@@ -1,0 +1,14 @@
+{
+  "name": "contact-form",
+  "version": "1.0.0",
+  "description": "Contact form that user submit and you receive directly to email account.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jay Khans",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
