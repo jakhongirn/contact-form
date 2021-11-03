@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const sendMail = require('./mail');
 
 const app = express();
 const path = require('path');
@@ -13,10 +14,25 @@ app.get('/', (req, res) => {
 })
 
 app.post('/email', (req, res) => {
-    //Send an email here but currently dummy email
-    console.log("name :", req.body.name);
-    console.log("number: ", req.body.number);
-    
+    // res.sendFile(path.join(__dirname + '/contact-us.html'));
+    //TODO
+    //send email here
+    const name = req.body.name
+    const number = req.body.number;
+    const Data = {
+        "Client's name": name,
+        "Client's number": number
+    }
+    console.log(Data);
+
+    sendMail(name, number, function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.status({ message: 'Email sent!!!' });
+        }
+    });
+    // res.json({ message: 'Message received!!!' })
 });
 
 
