@@ -2,6 +2,7 @@ const express = require("express");
 const mailgun = require("mailgun-js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const { Telegraf }= require("telegraf")
 
 const app = express();
 const PORT = 8080;
@@ -9,6 +10,7 @@ const path = require("path");
 
 dotenv.config();
 
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const API_KEY = process.env.API_KEY 
 const DOMAIN = process.env.DOMAIN 
@@ -31,6 +33,9 @@ app.post("/email", (req, res) => {
   const clientNumber = req.body.phoneNumber
 
   console.log(clientName, clientNumber)
+
+  bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Ф.И.О клиента: ${clientName}\nНомер клиента: ${clientNumber}`)
+
 
   const mg = mailgun({
     apiKey: API_KEY,
