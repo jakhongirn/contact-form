@@ -4,51 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/main.css">
     <title>Форма</title>
   </head>
   <body>
-    
-   <div class="success contact-text">
-      <h3>Cпасибо за внимания. Скоро с вами будем связаться!</h3>
-    </div>
+
+
+      <div class="container-fluid contact1 ">
+        <div class="card w-35">
+          <div class="card-body">
+            <h4 class="card-text text-center">Cпасибо за внимания .<br> Скоро с вами будем связаться 📞</h4> 
+          </div>
+        </div>
+      </div>
 
     
-    <script>
-      $("document").ready(function () {
-        $('input[type="text"], input[type="email"], textarea').focus(
-          function () {
-            var background = $(this).attr("id");
-            $("#" + background + "-form").addClass("formgroup-active");
-            $("#" + background + "-form").removeClass("formgroup-error");
-          }
-        );
-        $('input[type="text"], input[type="email"], textarea').blur(
-          function () {
-            var background = $(this).attr("id");
-            $("#" + background + "-form").removeClass("formgroup-active");
-          }
-        );
-
-        function errorfield(field) {
-          $(field).addClass("formgroup-error");
-          console.log(field);
-        }
-
-        $("#waterform").submit(function () {
-          var stopsubmit = false;
-
-          if ($("#name").val() == "") {
-            errorfield("#name-form");
-            stopsubmit = true;
-          }
-          if ($("#email").val() == "") {
-            errorfield("#email-form");
-            stopsubmit = true;
-          }
-          if (stopsubmit) return false;
-        });
-      });
-    </script>
+    
   </body>
 </html>
