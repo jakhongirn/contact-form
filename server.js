@@ -3,6 +3,8 @@ const mailgun = require("mailgun-js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const { Telegraf }= require("telegraf")
+const extra = require("telegraf/extra");
+const markup = extra.markdown();
 
 const app = express();
 const PORT = process.env.PORT || 5000
@@ -34,7 +36,9 @@ app.post("/email", (req, res) => {
 
   console.log(clientName, clientNumber)
 
-  bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Ф.И.О клиента: ${clientName}\nНомер клиента: ${clientNumber}`)
+  bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n**Номер клиента:** ${clientNumber}`, markup)
+  bot.telegram.sendMessage(process.env.GROUP_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n**Номер клиента:** ${clientNumber}`, markup)
+  bot.telegram.sendMessage(process.env.USER_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n📲**Номер клиента:** ${clientNumber}`, markup)
 
 
   const mg = mailgun({
