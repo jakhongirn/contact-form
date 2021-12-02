@@ -37,9 +37,7 @@ app.post("/email", (req, res) => {
 
   bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
   bot.telegram.sendMessage(process.env.GROUP_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
-  bot.telegram.sendMessage(process.env.USER_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
-
-
+  
   const mg = mailgun({
     apiKey: API_KEY,
     domain: DOMAIN
