@@ -3,12 +3,11 @@ const mailgun = require("mailgun-js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const { Telegraf }= require("telegraf")
-const extra = require("telegraf/extra");
-const markup = extra.markdown();
 
 const app = express();
 const PORT = process.env.PORT || 5000
 const path = require("path");
+
 
 dotenv.config();
 
@@ -36,27 +35,27 @@ app.post("/email", (req, res) => {
 
   console.log(clientName, clientNumber)
 
-  bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n**Номер клиента:** ${clientNumber}`, markup)
-  bot.telegram.sendMessage(process.env.GROUP_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n**Номер клиента:** ${clientNumber}`, markup)
-  bot.telegram.sendMessage(process.env.USER_ID, `Приветики👋 Клиент хочет с вами связаться!\n**Имя клиента:** ${clientName}\n📲**Номер клиента:** ${clientNumber}`, markup)
+  bot.telegram.sendMessage(process.env.DEVELOPER_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
+  bot.telegram.sendMessage(process.env.GROUP_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
+  bot.telegram.sendMessage(process.env.USER_ID, `Приветики👋 Клиент хочет с вами связаться \n<b>Имя клиента:</b> ${clientName}\n<b>Номер клиента:</b> +${clientNumber} 📲`, { parse_mode: "HTML" })
 
 
   const mg = mailgun({
     apiKey: API_KEY,
     domain: DOMAIN
   });
-  const data = {
-    from: "Modern Academy <admin@modernacademy.uz>",
-    to: "jaykhansme@gmail.com",
-    subject: "Заявка через инстаграм modernacademy.uz",
-    text: `ФИО клиента: ${clientName}\nТелефон номер клиента: ${clientNumber}`
-  };
-  mg.messages().send(data, function (error, body) {
-    console.log(body);
-  });
+  // const data = {
+  //   from: "Modern Academy <admin@modernacademy.uz>",
+  //   to: "jaykhansme@gmail.com",
+  //   subject: "Заявка через инстаграм modernacademy.uz",
+  //   text: `ФИО клиента: ${clientName}\nТелефон номер клиента: ${clientNumber}`
+  // };
+  // mg.messages().send(data, function (error, body) {
+  //   console.log(body);
+  // });
   res.redirect("/success")
 });
 
 app.listen(PORT, () => {
-  console.log("Server is running on port 8080...");
+  console.log(`Server is running on port ${PORT}...`);
 });
